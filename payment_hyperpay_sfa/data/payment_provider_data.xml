@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+  <record id="payment_provider_hyperpay" model="payment.provider">
+    <field name="code">hyperpay</field>
+    <field name="name">HyperPay</field>
+    <field name="image_128" type="base64" file="payment_hyperpay_sfa/static/img/hyperpay.png"/>
+    <field name="state">disabled</field>
+    <field name="inline_form_view_id" ref="inline_form"/>
+    
+  </record>
+
+</odoo>

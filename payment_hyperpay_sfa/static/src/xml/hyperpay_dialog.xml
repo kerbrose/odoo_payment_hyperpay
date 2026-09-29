@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+  <t t-name="payment_hyperpay_sfa.ConfirmationDialog">
+    <Dialog size="'md'" title="props.title" modalRef="modalRef">
+      <div class="hyperpay-gateway-body"  t-ref="hyperpaygatewayel"/>
+      <p t-out="props.body" class="text-prewrap"/>
+      <t t-set-slot="footer">
+        <button class="btn" t-att-class="props.confirmClass" t-on-click="_confirm" t-out="props.confirmLabel"/>
+        <button t-if="props.cancel" class="btn btn-secondary" t-on-click="_cancel" t-out="props.cancelLabel"/>
+      </t>
+    </Dialog>
+  </t>
+
+  
+
+</templates>
