@@ -2,7 +2,7 @@
 
 {
     'name': "Payment Provider: Hyperpay",
-    'version': '18.0.0.1.2',
+    'version': '19.0.0.1.2',
     'category': 'Accounting/Payment Providers',
     'sequence': 350,
     'summary': "A payment provider which supports Hyperpay.",

@@ -17,7 +17,7 @@ _logger = logging.getLogger(__name__)
 class HyperpayController(http.Controller):
     _webhook_url = '/payment/hyperpay/webhook'
 
-    @http.route('/payment/hyperpay/payment_methods', type='json', auth='public')
+    @http.route('/payment/hyperpay/payment_methods', type='jsonrpc', auth='public')
     def hyperpay_payment_methods(self, provider_id, formatted_amount=None, currency=None):
         """Query the available payment methods based on the payment context.
 

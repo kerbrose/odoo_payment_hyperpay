@@ -2,7 +2,9 @@
 /* global Hyperpay */
 
 import { _t } from '@web/core/l10n/translation';
-import paymentForm from '@payment/js/payment_form';
+import { PaymentForm } from '@payment/interactions/payment_form';
+import { patch } from '@web/core/utils/patch';
+
 import { HyperpayDialog } from "./hyperpay_dialog";
 
 import { getGeneratedPageURL } from "./generate_blob";
@@ -10,7 +12,7 @@ import { getGeneratedPageURL } from "./generate_blob";
 import { rpc } from '@web/core/network/rpc';
 
 
-paymentForm.include({
+patch(PaymentForm.prototype, {
 
     async _initiatePaymentFlow(providerCode, paymentOptionId, paymentMethodCode, flow) {
         if (providerCode !== 'hyperpay') {
@@ -31,10 +33,10 @@ paymentForm.include({
             css: hyperpayCss,
             js: jQScript
         });
-        this.call('ui', 'unblock');
+        this.env.bus.trigger('ui', 'unblock');
 
         let title = 'Hyperpay Gateway';
-        this.call('dialog', 'add', HyperpayDialog, { title: title, HyperpayEL: hyperpayIframBody, confirm: false });
+        this.services.dialog.add(HyperpayDialog, { title: title, HyperpayEL: hyperpayIframBody});
     },
 
     // #=== DOM MANIPULATION ===#
@@ -117,6 +119,18 @@ paymentForm.include({
                 }
             },
         });
+    },
+
+
+    async submitForm(ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        const checkedRadio = this.el.querySelector('input[name="o_payment_radio"]:checked');
+        const providerCode = this._getProviderCode(checkedRadio);
+        if (providerCode === 'hyperpay') {
+            this.paymentContext.flow = 'direct';
+        }
+        return await super.submitForm(...arguments);
     },
 
 });
