@@ -34,5 +34,5 @@
     'uninstall_hook': 'uninstall_hook',
     'license': 'LGPL-3',
     "currency ": "USD",
-    "price": 140,
+    "price": 120,
 }
